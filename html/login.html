@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/login.css">
+
+</head>
+<body>
+    <div class="container login" id="container">
+        <form class="form-horizontal" action="#" id="formUser">
+            <div class="form-group" id="account">
+              <label for="inputEmail3" class="col-sm-2 control-label">Account</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="请输入账户">
+              </div>
+            </div>
+            <div class="form-group" id="password">
+              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-7">
+                <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Remember me
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" id="btn">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+              </div>
+            </div>
+          </form>
+    </div>
+
+    <script>
+        $(function(){
+            var userData = {
+              account:'',
+              password:'',
+              id:''
+            }
+
+            var account = $('#container').find('#account').find('input')
+            var password = $('#container').find('#password').find('input')
+            var sumbit = $('#container').find('#btn').find('button')
+            var forms = $('#container').find('#formUser')
+
+            // 向后台提交数据
+            sumbit.on('click',()=>{
+              let num = Math.floor(Math.random()*(1000-1+1)+1)
+              num = num.toString()
+
+              userData.id = num
+
+              if(account.val() == null || account.val() == undefined || account.val() == ''){
+                alert('请输入账户!')
+              }
+              else{
+                userData.account = account.val()
+              }
+
+              if(password.val() == null || password.val() == undefined || password.val() == ''){
+                alert('请输入密码!')
+              }
+              else{
+                userData.password = password.val()
+              }
+
+               new Promise((resolve, reject)=>{
+
+                $.ajax({
+                  url:'http://localhost:8080/login/test',
+                  method:'post',
+                  data: JSON.stringify(userData),
+                  success(data){
+                    resolve(data)
+                  },
+                  error(){
+                    console.log('error');
+                  }
+                })
+              })
+              .then((data)=>{
+                // 账户密码正确
+                if(data){
+                  window.location.href = './main.html'
+                }
+                else{
+                  window.location.href = './erro.html'
+                }
+              })
+
+              // 清除input
+              account.val('')
+              password.val('')
+
+            })
+        
+
+          })
+    </script>
+</body>
+</html>

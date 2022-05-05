@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../jquery-tmpl-master/jquery-tmpl-master/jquery.tmpl.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
+            <!-- nav -->
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">首页</a></li>
+                <li role="presentation"><a href="#">国漫</a></li>
+                <li role="presentation"><a href="#">日本动漫</a></li>
+                <li role="presentation"><a href="#">欧美动漫</a></li>
+                <li role="presentation"><a href="#">动漫电影</a></li>
+              </ul>
+                    
+              <section style="display: flex;">
+                <!-- search -->      
+                <div class="input-group" style="display: flex;">
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+                    <button>search</button>
+                </div>
+
+                <div class="user" style="margin-left: 50px; height: 25px; line-height: 25px;">
+                <!-- store  -->
+                <span>
+                    <button>历史记录</button>
+                </span>
+
+                <!-- user  -->
+                <span>
+                    <button>user</button>
+                </span>
+                </div>
+              </section>
+
+        </header>
+
+        <!-- 分类 -->
+        <section style="margin-top: 50px;">
+            <div class="sort">
+                 <div style="display: flex; justify-content: space-between; height: 30px; line-height: 30px;">
+                     <h4>首页</h4>
+                     <h4 style="color: #ccc; cursor: pointer;">更多></h4>
+                 </div>
+                <ul class="list-unstyled list-sort" >
+                    <!-- 改良用模板 -->
+                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>                    <li>
+                        <span>
+                            <img src="../img/OIP-C.jpg" alt="">
+                        </span>
+                        <span>
+                            <h6>hello world</h6>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+
+    <table  id="tableList">
+        <th >分类</th>
+        <th >名称</th>
+        <th >单价(元)</th>
+        <th >单位</th>
+    </table>
+    <script  type="text/x-jquery-tmpl"  id="tr">  //type必须写
+        <tr>
+           <td >${classification}</td>
+           <td >${name}</td>
+           <td >${price}</td>
+           <td >${unit}</td>
+        </tr>
+</script>
+
+    <script>
+    $(function () {
+        function addGoodsList() {
+            //定义需要显示的数据
+            var cartList = [
+                {classification: "饮料",name: "可口可乐", price: "3", unit: "瓶"},
+                {classification: "饮料",name: "雪碧", price : "3",   unit: "瓶"},
+                {classification: "水果", name: "苹果", price : "5.5", unit: "斤"},
+                {classification: "水果", name: "荔枝",  price: "15",   unit: "斤"},
+                {classification: "生活用品",name: "电池", price : "2", unit: "个"}
+            ]
+            //填写模板，用tmpl()将定义的数据填写到编写的模板里appendTo（）在被选元素的结尾处插入填写好的模板,自动生成表格
+            $("#tr").tmpl(cartList).appendTo('#tableList');
+        }
+
+        addGoodsList()
+    })
+
+    </script>
+
+</body>
+
+</html>

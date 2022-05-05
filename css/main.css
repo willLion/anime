@@ -1,0 +1,27 @@
+.sort .list-sort{
+    width: 1200px;
+    height: 600px;
+    border: 1px solid pink;
+    display: flex;
+    flex-wrap: wrap;
+}
+.sort .list-sort li{
+    width: 175px;
+    height: 270px;
+    border: 1px solid pink;
+    margin-left: 15px;
+    background: url(../img/load.gif) no-repeat;
+    overflow: hidden;
+    border-radius: 7px;
+}
+
+.sort .list-sort li img{
+    height: 240px;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.sort .list-sort li h6{
+    overflow: hidden;
+    padding-bottom: 2px;
+    text-align: center;
+}
