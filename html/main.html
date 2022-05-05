@@ -11,20 +11,21 @@
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="../jquery-tmpl-master/jquery-tmpl-master/jquery.tmpl.js"></script>
+    <script src="../js/test.js"></script>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
     <div class="container">
-         <!-- S nav -->
+        <!-- S nav -->
         <header style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
             <!-- nav -->
-            <ul class="nav nav-pills">
+            <ul class="nav nav-pills" id="select-sort">
                 <li role="presentation" class="active"><a href="#">首页</a></li>
-                <li role="presentation"><a href="#">国漫</a></li>
-                <li role="presentation"><a href="#">日本动漫</a></li>
-                <li role="presentation"><a href="#">欧美动漫</a></li>
-                <li role="presentation"><a href="#">动漫电影</a></li>
+                <li role="presentation"><a href="/html/sort_html/anime_chinese.html">国漫</a></li>
+                <li role="presentation"><a href="/html/sort_html/anime_japan.html">日本动漫</a></li>
+                <li role="presentation"><a href="/html/sort_html/anime_europ.html">欧美动漫</a></li>
+                <li role="presentation"><a href="/html/sort_html/anime_mv.html">动漫电影</a></li>
             </ul>
 
             <section style="display: flex;">
@@ -49,27 +50,10 @@
             </section>
 
         </header>
-         <!-- E nav -->
+        <!-- E nav -->
 
         <!-- S 首页 -->
-        <section style="margin-top: 50px;" id="mv">
-            <!-- <div class="sort">
-                <div style="display: flex; justify-content: space-between; height: 30px; line-height: 30px;">
-                    <h4>首页</h4>
-                    <h4 style="color: #ccc; cursor: pointer;">更多></h4>
-                </div>
-                <ul class="list-unstyled list-sort">
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                </ul>
-            </div> -->
-        </section>
+        <section style="margin-top: 50px;" id="mv"></section>
         <!-- E 首页 -->
 
 
@@ -80,7 +64,7 @@
 
 
 
-    <script type="text/x-jquery-tmpl" id="sort"> 
+    <script type="text/x-jquery-tmpl" id="sort">
         <div class="sort">
             <div style="display: flex; justify-content: space-between; height: 30px; line-height: 30px;">
                 <h4>${flag}</h4>
@@ -104,7 +88,7 @@
     <script>
         $(function () {
             // 分类模板
-            function addText(flag){
+            function addText(flag) {
                 var sortData = {
                     // 标识
                     flag: flag,
@@ -114,13 +98,39 @@
                     text_arr: []
                 }
 
-                for(let i = 0; i<12; i++){
+                for (let i = 0; i < 12; i++) {
                     sortData.src_arr[i] = '../img/OIP-C.jpg'
                     sortData.text_arr[i] = 'hello world'
                 }
-                console.log(sortData);
                 $('#sort').tmpl(sortData).appendTo('#mv')
             }
+
+            // 点击分类导航栏
+            function clickSelectNav() {
+                let ul = $('#select-sort')
+                for (let i = 0; i < ul.children().length; i++) {
+                    ul.children().eq(i).on('click', () => {
+
+                        for (let j = 0; j < ul.children().length; j++) {
+                            ul.children().eq(j).find('a').css({
+                                color: '#337ab7',
+                                backgroundColor: 'transparent'
+                            })
+                        }
+
+                        ul.children().eq(i).find('a').css({
+                            color: '#fff',
+                            backgroundColor: '#337ab7'
+                        })
+
+                        // url传递参数
+                        ul.children().eq(i).find('a').attr('href', ul.children().eq(i).find('a').attr('href') + '?index=' + i)
+
+
+                    })
+                }
+            }
+
 
             // 优化flag data从后台传输
             addText('首页')
@@ -128,6 +138,8 @@
             addText('日本动漫')
             addText('欧美动漫')
             addText('动漫电影')
+
+            clickSelectNav()
 
         })
     </script>
