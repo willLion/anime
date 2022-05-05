@@ -51,103 +51,14 @@
         </header>
          <!-- E nav -->
 
-        <!-- S sort -->
-        <section style="margin-top: 50px;">
-            <div class="sort">
+        <!-- S 首页 -->
+        <section style="margin-top: 50px;" id="mv">
+            <!-- <div class="sort">
                 <div style="display: flex; justify-content: space-between; height: 30px; line-height: 30px;">
                     <h4>首页</h4>
                     <h4 style="color: #ccc; cursor: pointer;">更多></h4>
                 </div>
                 <ul class="list-unstyled list-sort">
-                    <!-- 改良用模板 -->
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <img src="../img/OIP-C.jpg" alt="">
-                        </span>
-                        <span>
-                            <h6>hello world</h6>
-                        </span>
-                    </li>
                     <li>
                         <span>
                             <img src="../img/OIP-C.jpg" alt="">
@@ -157,67 +68,67 @@
                         </span>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </section>
-        <!-- E sort -->
+        <!-- E 首页 -->
+
+
+        <!--  S 分页 -->
+        <!--  E 分页 -->
+
     </div>
 
 
-    <table id="tableList">
-        <th>分类</th>
-        <th>名称</th>
-        <th>单价(元)</th>
-        <th>单位</th>
-    </table>
-    <script type="text/x-jquery-tmpl" id="tr"> //type必须写
-        <tr>
-           <td >${classification}</td>
-           <td >${name}</td>
-           <td >${price}</td>
-           <td >${unit}</td>
-        </tr>
+
+    <script type="text/x-jquery-tmpl" id="sort"> 
+        <div class="sort">
+            <div style="display: flex; justify-content: space-between; height: 30px; line-height: 30px;">
+                <h4>${flag}</h4>
+                <h4 style="color: #ccc; cursor: pointer;">更多></h4>
+            </div>
+            <ul class="list-unstyled list-sort">
+                {{each(i,value) src_arr}}
+                <li>
+                    <span>
+                        <img src=${value} alt="">
+                    </span>
+                    <span>
+                        <h6>${text_arr[i]}</h6>
+                    </span>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
 </script>
 
     <script>
         $(function () {
-            function addGoodsList() {
-                //定义需要显示的数据
-                var cartList = [{
-                        classification: "饮料",
-                        name: "可口可乐",
-                        price: "3",
-                        unit: "瓶"
-                    },
-                    {
-                        classification: "饮料",
-                        name: "雪碧",
-                        price: "3",
-                        unit: "瓶"
-                    },
-                    {
-                        classification: "水果",
-                        name: "苹果",
-                        price: "5.5",
-                        unit: "斤"
-                    },
-                    {
-                        classification: "水果",
-                        name: "荔枝",
-                        price: "15",
-                        unit: "斤"
-                    },
-                    {
-                        classification: "生活用品",
-                        name: "电池",
-                        price: "2",
-                        unit: "个"
-                    }
-                ]
-                //填写模板，用tmpl()将定义的数据填写到编写的模板里appendTo（）在被选元素的结尾处插入填写好的模板,自动生成表格
-                $("#tr").tmpl(cartList).appendTo('#tableList');
+            // 分类模板
+            function addText(flag){
+                var sortData = {
+                    // 标识
+                    flag: flag,
+                    // 链接
+                    src_arr: [],
+                    // 文本描述
+                    text_arr: []
+                }
+
+                for(let i = 0; i<12; i++){
+                    sortData.src_arr[i] = '../img/OIP-C.jpg'
+                    sortData.text_arr[i] = 'hello world'
+                }
+                console.log(sortData);
+                $('#sort').tmpl(sortData).appendTo('#mv')
             }
 
-            addGoodsList()
+            // 优化flag data从后台传输
+            addText('首页')
+            addText('国漫')
+            addText('日本动漫')
+            addText('欧美动漫')
+            addText('动漫电影')
+
         })
     </script>
 
